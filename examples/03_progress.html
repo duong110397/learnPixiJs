@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>progress</title>
+<body>
+  <script src="../pixi/pixi.min.js"></script>
+  <script type="text/javascript">
+    let Application = PIXI.Application,
+        Container = PIXI.Container,
+        loader = PIXI.loader,
+        resources = PIXI.loader.resources,
+        TextureCache = PIXI.utils.TextureCache,
+        Sprite = PIXI.Sprite;
+
+    let app = new PIXI.Application({
+        width: 256,
+        height: 256,
+        transparent: false,
+        antialiasing: true,
+        resolution: 1
+      });
+
+      document.body.appendChild(app.view);
+
+      loader
+        .add([
+          "images/cat.png",
+          "images/blob.png",
+          "images/door.png",
+          "images/explorer.png"
+          ])
+        .on("progress", loadProgressHandler)
+        .load(setup);
+
+      function loadProgressHandler(loader, resource) {
+
+        //Display the file `url` currently being loaded
+        console.log("loading: " + resource.url);
+
+        //If you gave your files names with the `add` method, you can access
+        //them like this
+        //console.log("loading: " + resource.name);
+
+        //Display the precentage of files currently loaded
+        console.log("progress: " + loader.progress + "%");
+      }
+
+      function setup(){
+        let cat = new PIXI.Sprite(PIXI.loader.resources["images/cat.png"].texture),
+            blob = new PIXI.Sprite(PIXI.loader.resources["images/blob.png"].texture),
+            door = new PIXI.Sprite(PIXI.loader.resources["images/door.png"].texture),
+            explorer = new PIXI.Sprite(PIXI.loader.resources["images/explorer.png"].texture);
+
+        app.stage.addChild(cat);
+        app.stage.addChild(blob);
+        app.stage.addChild(door);
+        app.stage.addChild(explorer);
+
+        blob.position.set(82, 82);
+        explorer.position.set(128, 128);
+        door.position.set(200,200);
+
+      }
+  </script>
+
+</body>
+

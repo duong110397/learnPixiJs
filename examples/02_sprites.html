@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> sprites</title>
+</head>
+  <body>
+    <script src="../pixi/pixi.min.js"></script>
+    <script type="text/javascript">
+      let app = new PIXI.Application({
+        width: 256,
+        height: 256,
+        transparent: false,
+        antialias: true,
+        resolution: 1
+      });
+
+      document.body.appendChild(app.view);
+
+      PIXI.loader
+        .add("images/cat.png")
+        .load(setup);
+
+      function setup(){
+        let cat = new PIXI.Sprite(PIXI.loader.resources["images/cat.png"].texture);
+        app.stage.addChild(cat);
+      }
+
+    </script>
+  </body>
+</html>

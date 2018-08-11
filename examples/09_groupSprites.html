@@ -1,0 +1,74 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Grouping sprites</title>
+<body>
+<script src="../pixi/pixi.min.js"></script>
+<script>
+
+//Aliases
+let Application = PIXI.Application,
+    Container = PIXI.Container,
+    loader = PIXI.loader,
+    resources = PIXI.loader.resources,
+    TextureCache = PIXI.utils.TextureCache,
+    Sprite = PIXI.Sprite;
+
+//Create a Pixi Application
+let app = new Application({
+    width: 512,
+    height: 512,
+    antialiasing: true,
+    transparent: false,
+    resolution: 1
+  }
+);
+
+//Add the canvas that Pixi automatically created for you to the HTML document
+document.body.appendChild(app.view);
+
+//load a JSON file and run the `setup` function when it's done
+loader
+  .add("images/animals.json")
+  .load(setup);
+
+
+function setup() {
+
+  //There are three ways to make sprites from textures atlas frames
+
+  //Make the three animal sprites
+
+  //Create an alias for the texture atlas frame ids
+  let id = resources["images/animals.json"].textures;
+
+  //The cat
+  let cat = new Sprite(id["cat.png"]);
+  cat.position.set(16, 16);
+
+  //The hedgehog
+  let hedgehog = new Sprite(id["hedgehog.png"]);
+  hedgehog.position.set(32, 32);
+
+  //The tiger
+  let tiger = new Sprite(id["tiger.png"]);
+  tiger.position.set(64, 64);
+
+  //Group the animals
+  let animals = new Container();
+  animals.addChild(cat);
+  animals.addChild(hedgehog);
+  animals.addChild(tiger);
+
+  //Add the `animals` group to the stage
+  app.stage.addChild(animals);
+
+  //Change the position of the group
+  animals.position.set(192, 128);
+
+}
+
+</script>
+</body>
+
+
+

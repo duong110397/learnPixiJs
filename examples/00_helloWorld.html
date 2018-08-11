@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> intro PixiJs </title>
+</head>
+<body>
+  <script src="../pixi/pixi.min.js"></script>
+  <script type="text/javascript">
+    let type = "WebGL"
+    if(!PIXI.utils.isWebGLSupported()){
+      type = "canvas"
+    }
+    PIXI.utils.sayHello(type)
+  </script>
+</body>
+</html>
